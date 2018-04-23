@@ -10,11 +10,11 @@ def BPF():
     else:
         with open('ventas.txt') as file:
             contenido = ''
-            IF = input('Introduzca la fecha con el siguiente formato (aaaa-mm-dd): ')
+            IF = input('Introduzca la fecha con el siguiente formato (DD/MM/AAAA): ')
             cont = 0
             for linea in file.readlines():
                 lista = linea.strip().split(', ')
-                if IF in lista[0]:
+                if IF in lista[6]:
                     contenido += linea
                     print(linea.strip())
                     cont  +=1
