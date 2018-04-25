@@ -8,18 +8,28 @@ def BPF():
     elif os.stat('ventas.txt').st_size == 0:
         print('Este archivo no contiene información.')
     else:
-        with open('ventas.txt') as file:
-            contenido = ''
-            IF = input('Introduzca la fecha con el siguiente formato (DD/MM/AAAA): ')
-            cont = 0
-            for linea in file.readlines():
-                lista = linea.strip().split(', ')
-                if IF in lista[6]:
-                    contenido += linea
-                    print(linea.strip())
-                    cont  +=1
-            if cont == 0:
-                print('El dato introducido no es válido o no existe.')
+        while True:
+            total = 0
+            os.system('cls')
+            print("----------------------------------")
+            print("    Sistema de Punto de Ventas    ")
+            print("    REPORTE DE VENTAS POR FECHA")
+            print("----------------------------------")
+            print(" ")
+            while True:
+                fecha = (input("Ingresa la fecha de búsqueda: "))
+                try:
+                    f = open('ventas.txt', 'r')
+                except FileExistsError:
+                    msn = (input("ERROR: no existe el archivo de ventas"))
+                    break
 
-        with open('reportefecha.txt', 'w') as file:
-            file.write(contenido)
+                if (fecha == 0):
+                    return
+
+                for linea in f.readlines():
+                    linea = linea.split(',')
+                    if (linea[0] == '2' and linea[7] == fecha):
+                        total = float(linea[4]) + total
+                break
+            msn = (input("Total en ventas por fecha: " + str(total) + "$"))
